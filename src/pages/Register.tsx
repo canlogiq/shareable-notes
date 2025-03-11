@@ -89,6 +89,12 @@ const Register: React.FC = () => {
           </p>
         </div>
       </div>
+      
+      <footer className="fixed bottom-0 left-0 right-0 p-4 text-center text-white/80 text-sm">
+        <p className="bg-black/30 inline-block px-4 py-2 rounded-lg backdrop-blur-sm mx-auto">
+          Create and share simple notes with anyone, instantly.
+        </p>
+      </footer>
     </div>
   );
 };
