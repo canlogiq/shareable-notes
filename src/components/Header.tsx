@@ -1,22 +1,20 @@
 
 import React from 'react';
 import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 import { useNotes } from '@/context/NoteContext';
 import ActionButton from './ActionButton';
 
 const Header: React.FC = () => {
   const { createNote } = useNotes();
+  const navigate = useNavigate();
 
   const handleAccount = () => {
-    toast('Account feature', {
-      description: 'Please login or register to access your account.',
-    });
+    navigate('/account-details');
   };
 
   const handleMyNotes = () => {
-    toast('My Notes feature', {
-      description: 'Your saved notes will be available after login.',
-    });
+    navigate('/my-notes');
   };
 
   return (
