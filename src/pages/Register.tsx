@@ -15,8 +15,14 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen wood-texture p-4 flex items-center justify-center">
-      <div className="max-w-md w-full bg-white/90 rounded-lg shadow-xl backdrop-blur-sm p-6 animate-fade-in">
+    <div className="min-h-screen wood-texture p-4">
+      <div className="max-w-4xl mx-auto mb-4 text-center">
+        <h1 className="text-2xl font-semibold text-slate-800 drop-shadow-md bg-white/60 inline-block px-4 py-2 rounded-lg backdrop-blur-sm">
+          Welcome to vnotes.cc
+        </h1>
+      </div>
+      
+      <div className="max-w-md mx-auto bg-white/90 rounded-lg shadow-xl backdrop-blur-sm p-6 animate-fade-in">
         <div className="text-center mb-6">
           <Link to="/" className="inline-block">
             <h1 className="text-3xl font-bold text-gray-800 tracking-tight">
@@ -90,8 +96,8 @@ const Register: React.FC = () => {
         </div>
       </div>
       
-      <footer className="fixed bottom-0 left-0 right-0 p-4 text-center text-white/80 text-sm">
-        <p className="bg-black/30 inline-block px-4 py-2 rounded-lg backdrop-blur-sm mx-auto">
+      <footer className="max-w-4xl mx-auto mt-8 text-center text-white/80 text-sm">
+        <p className="bg-black/30 inline-block px-4 py-2 rounded-lg backdrop-blur-sm">
           Create and share simple notes with anyone, instantly.
         </p>
       </footer>
