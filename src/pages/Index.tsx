@@ -8,7 +8,7 @@ const Index: React.FC = () => {
     <div className="min-h-screen wood-texture p-4">
       <div className="max-w-4xl mx-auto mb-4 text-center">
         <h1 className="text-2xl font-semibold text-slate-800 drop-shadow-md bg-white/60 inline-block px-4 py-2 rounded-lg backdrop-blur-sm">
-          What is notes.io?
+          Welcome to vnotes.cc
         </h1>
       </div>
       

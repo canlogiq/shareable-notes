@@ -2,11 +2,12 @@
 import React from 'react';
 import Header from './Header';
 import NoteEditor from './NoteEditor';
+import SharePopup from './SharePopup';
 import { useNotes } from '@/context/NoteContext';
 import { formatDate } from '@/utils/noteUtils';
 
 const NoteArea: React.FC = () => {
-  const { currentNote, saveNote } = useNotes();
+  const { currentNote, saveNote, shortenedUrl, isSharePopupOpen, closeSharePopup } = useNotes();
 
   return (
     <div className="max-w-4xl mx-auto my-4 shadow-xl rounded-lg overflow-hidden transition-all duration-300 animate-fade-in">
@@ -29,6 +30,12 @@ const NoteArea: React.FC = () => {
           </button>
         </div>
       </div>
+      
+      <SharePopup 
+        shortenedUrl={shortenedUrl} 
+        isOpen={isSharePopupOpen} 
+        onClose={closeSharePopup} 
+      />
     </div>
   );
 };

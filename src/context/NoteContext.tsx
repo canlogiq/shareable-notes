@@ -12,10 +12,13 @@ export interface Note {
 interface NoteContextType {
   currentNote: Note | null;
   savedNotes: Note[];
+  shortenedUrl: string;
+  isSharePopupOpen: boolean;
   createNote: () => void;
   updateNoteContent: (content: string) => void;
   saveNote: () => void;
   shareNote: () => void;
+  closeSharePopup: () => void;
   generateRandomNote: () => void;
   clearNote: () => void;
 }
@@ -25,7 +28,7 @@ const NoteContext = createContext<NoteContextType | undefined>(undefined);
 const DEFAULT_NOTES = [
   {
     id: '1',
-    content: 'Welcome to Notes.io! This is a sample note to get you started.',
+    content: 'Welcome to vnotes.cc! This is a sample note to get you started.',
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -34,6 +37,8 @@ const DEFAULT_NOTES = [
 export const NoteProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentNote, setCurrentNote] = useState<Note | null>(null);
   const [savedNotes, setSavedNotes] = useState<Note[]>(DEFAULT_NOTES);
+  const [shortenedUrl, setShortenedUrl] = useState<string>('');
+  const [isSharePopupOpen, setIsSharePopupOpen] = useState<boolean>(false);
 
   // Load notes from localStorage on first render
   useEffect(() => {
@@ -115,23 +120,19 @@ export const NoteProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return;
     }
     
-    // In a real implementation, we would generate a shareable link
-    // For now, we'll just simulate it by showing a toast
+    // First save the note if it hasn't been saved yet
+    if (!savedNotes.find(note => note.id === currentNote.id)) {
+      saveNote();
+    }
     
-    navigator.clipboard.writeText(
-      `${window.location.origin}/share/${currentNote.id}\n\n${currentNote.content}`
-    )
-      .then(() => {
-        toast('Share link copied!', {
-          description: 'A link to your note has been copied to clipboard',
-        });
-      })
-      .catch(err => {
-        console.error('Could not copy text: ', err);
-        toast('Error sharing note', {
-          description: 'Could not generate share link',
-        });
-      });
+    // Generate a shortened URL (in a real app, this would call an API)
+    const fakeShortUrl = `vnotes.cc/${currentNote.id.substring(0, 8)}`;
+    setShortenedUrl(fakeShortUrl);
+    setIsSharePopupOpen(true);
+  };
+
+  const closeSharePopup = () => {
+    setIsSharePopupOpen(false);
   };
 
   const generateRandomNote = () => {
@@ -168,10 +169,13 @@ export const NoteProvider: React.FC<{ children: React.ReactNode }> = ({ children
       value={{
         currentNote,
         savedNotes,
+        shortenedUrl,
+        isSharePopupOpen,
         createNote,
         updateNoteContent,
         saveNote,
         shareNote,
+        closeSharePopup,
         generateRandomNote,
         clearNote,
       }}
